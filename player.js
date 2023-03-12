@@ -15,7 +15,7 @@ class Player {
     this.image.frames = 3;
     this.image.framesIndex = 0;
 
-    this.posX = 50;
+    this.posX = this.gameWidth/2;
     this.posY = this.gameHeight - this.height - 20;
     this.posY0 = this.posY;
 
@@ -44,9 +44,15 @@ class Player {
     )
 
     // 2. Animate player
+    this.animate(framesCounter);
     // 3. Move player
+    this.move()
     // 4. Draw bullets
+    this.bullets.forEach((bullet)=>{bullet.draw()})
     // 5. Clear bullets
+    this.bullets = this.bullets.filter((bullet)=>{
+      return bullet
+    })
   }
 
   animate(framesCounter) {
@@ -75,10 +81,12 @@ class Player {
       switch (e.keyCode) {
         case this.keys.TOP:
           // Check if its on the floor 👀
+          if(this.posY>= this.posY0){this.jump()}
           // .jump()
           break;
         case this.keys.SPACE:
           // .shoot
+          this.shoot();
           break;
       }
     });
@@ -91,9 +99,13 @@ class Player {
 
   shoot() {
     // Add new Bullet to the bullets array
+    this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.posY0, this.width,this.height))
   }
 
   clearBullets() {
     // Clear bullets (.filter 👀)
+    this.bullets=this.bullets.frilter((bullet)=>{
+      return bullet.posX <= this.gameHeight
+    })
   }
 }

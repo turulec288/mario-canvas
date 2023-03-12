@@ -21,6 +21,8 @@ class Bullets {
   draw() {
     this.ctx.beginPath();
     // .arc(posX, posY, radius, startAngle, endAngle) + .fill
+    this.ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI*2)
+    this.ctx.fill()
     this.ctx.closePath();
     this.move()
   }

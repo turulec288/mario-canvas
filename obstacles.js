@@ -13,10 +13,13 @@ class Obstacle {
 
   draw() {
     // .fillRect(posX, posY, w, h);
+    this.ctx.fillRect(this.posX,  this.posY, this.width, this.height);
     // .move
+    this.move();
   }
 
   move() {
      // Change this.posX (Move horizontally)
+     this.posX -= this.velX
   }
 }
